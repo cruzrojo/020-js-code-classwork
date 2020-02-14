@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <title>2/14/2020 Dynamically Removing HTML</title>
+</head>
+
+<style>
+
+    body {
+        background-color: slategrey;
+    }
+
+    button {
+        background-color: lawngreen;
+        font-size: 20px;
+    }
+
+    input {
+        background-color: lightblue;
+        font-size: 30px;
+    }
+
+    .widget {
+        font-size: 5rem;
+        color:maroon;
+        text-shadow:0 0 5px #00b6a7 ;
+    }
+
+
+</style>
+
+<body>
+  <div class="widget">
+    <input type="text" id="chat-input">
+    <button id="msgBtn" onclick="sendMessage()">Submit</button>
+    <button onclick="clearMessages()">Clear Messages</button>
+    <div class="chat-wrapper"></div>
+  </div>
+</body>
+
+<script>
+  function sendMessage() {
+    const newDiv = document.createElement("div");
+    newDiv.classList.add('chatMsg');
+    let chatInput = document.querySelector('#chat-input').value;
+    const newContent = document.createTextNode(chatInput);
+    newDiv.appendChild(newContent);
+
+    const widget = document.querySelector(".widget");
+    let chatWrapper = document.querySelector("chat-wrapper");
+    document.querySelector('#chat-input').value = '';
+    
+    if (document.querySelectorAll('.chatMsg').length > 0) {
+      chatWrapper = document.querySelectorAll('.chatMsg')[0];
+    }
+    widget.insertBefore(newDiv, chatWrapper);
+  }
+
+  function clearMessages() {
+    const messages = document.querySelectorAll('.chatMsg');
+    messages.forEach(el => el.remove());
+  }
+</script>
+
+</html>
