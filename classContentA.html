@@ -10,9 +10,10 @@
     width: 400px;
   }
   .container {
+    background-color: rgb(0, 0, 0);
     position: relative;
     text-align: center;
-    color: white;
+    color: rgb(167, 35, 35);
   }
   .show-img-overlay {
     position: relative;
@@ -31,17 +32,33 @@
 
   <div class="container">
     <img src="https://s3.amazonaws.com/bottega-devcamp/browser-js/laptop.jpg" class="site-img" alt="Laptop">
-    <div class="hide-img-overlay">Image Description</div>
+    <div class="hide-img-overlay">Laptop Computer with some code on it that looks really impressive</div>
   </div>
 
   <div class="container">
     <img src="https://s3.amazonaws.com/bottega-devcamp/browser-js/another-laptop.jpg" class="site-img" alt="Laptop">
-    <div class="hide-img-overlay">Some Other Image Description</div>
+    <div class="hide-img-overlay">Laptop that looks really colorful and there are some pinkish lights...oooh sexy!!!</div>
   </div>
 
 </body>
 
 <script>
-
+  const img = document.getElementsByClassName('site-img')[0];
+  img.addEventListener('click', (e) => {
+    // debugger;
+  });
+  const imgs = document.querySelectorAll('.site-img');
+  imgs.forEach(img => {
+    img.addEventListener('mouseover', (event) => {
+      const captionElement = event.target.parentElement.children[1];
+      captionElement.className = 'show-img-overlay';
+    });
+  });
+  imgs.forEach(img => {
+    img.addEventListener('mouseout', (event) => {
+      const captionElement = event.target.parentElement.children[1];
+      captionElement.className = 'hide-img-overlay';
+    });
+  });
 </script>
 </html>
